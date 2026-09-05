@@ -378,27 +378,50 @@ body{
    MODAL
    ========================================================== */
 
-.modal-content h2{
-    margin-bottom:20px;
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
 }
 
-#postContent{
-    min-height:170px;
-
-    resize:vertical;
+.hidden {
+    display: none;
 }
 
-.modal-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    margin-top:18px;
+.modal-content {
+    background: white;
+    width: min(600px, 90vw);
+    border-radius: 18px;
+    padding: 20px;
 }
 
-#charCounter{
-    color:var(--color-text-light);
-    font-size:.9rem;
+#postForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#postContent {
+    width: 100%;
+    min-height: 170px;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    resize: vertical;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
 }
 
 /* ==========================================================
@@ -489,8 +512,6 @@ body{
         height:40px;
     }
 
-    .modal-content{
-        padding:20px;
-    }
+
 
 }

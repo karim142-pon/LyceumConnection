@@ -121,21 +121,42 @@ export async function getCurrentUser() {
 
 export async function getPosts() {
 
-    return request("/posts");
+    const response = await fetch("/api/posts", {
+        credentials: "include"
+    });
+
+    if (!response.ok)
+        throw new Error("Не удалось загрузить ленту.");
+
+    return response.json();
 
 }
 
-export async function createPost(content) {
+export async function createPost(data) {
 
-    return request("/posts", {
+    const response = await fetch("/api/posts", {
 
         method: "POST",
 
-        body: JSON.stringify({
-            content
-        })
+        credentials: "include",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(data)
 
     });
+
+    if (!response.ok) {
+
+        const error = await response.json();
+
+        throw new Error(error.message);
+
+    }
+
+    return response.json();
 
 }
 
