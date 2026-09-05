@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LyceumConnection — Регистрация</title>
+
+    <!-- Защита от XSS -->
+    <meta http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self';
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data:;
+        connect-src 'self' http://localhost:3000 http://127.0.0.1:3000;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+      ">
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+
+<div class="background-shape"></div>
+
+<main class="auth-container">
+
+    <section class="auth-left">
+
+        <div class="logo-circle">
+            LC
+        </div>
+
+        <h1>LyceumConnection</h1>
+
+        <p>
+            Создай аккаунт и присоединяйся к сообществу своего лицея.
+        </p>
+
+    </section>
+
+    <section class="auth-right">
+
+        <form id="registerForm"
+              class="auth-card"
+              autocomplete="off"
+              novalidate>
+
+            <h2>Регистрация</h2>
+
+            <div class="input-group">
+                <label for="firstName">Имя</label>
+                <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    placeholder="Иван"
+                    maxlength="50"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="lastName">Фамилия</label>
+                <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    placeholder="Иванов"
+                    maxlength="50"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="username">Имя пользователя</label>
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    placeholder="ivan_ivanov"
+                    minlength="3"
+                    maxlength="30"
+                    pattern="[A-Za-z0-9_]+"
+                    required
+                >
+                <small>Только латинские буквы, цифры и знак "_".</small>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Электронная почта</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="example@lyceum.ru"
+                    maxlength="255"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Пароль</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Не менее 8 символов"
+                    minlength="8"
+                    maxlength="128"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="confirmPassword">Подтверждение пароля</label>
+                <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Повторите пароль"
+                    minlength="8"
+                    maxlength="128"
+                    required
+                >
+            </div>
+
+            <button
+                id="registerButton"
+                class="primary-button"
+                type="submit">
+
+                Создать аккаунт
+
+            </button>
+
+            <p id="statusMessage"
+               class="status-message"
+               aria-live="polite"></p>
+
+            <div class="divider"></div>
+
+            <a class="secondary-button"
+               href="login.html">
+
+                Уже есть аккаунт
+
+            </a>
+
+        </form>
+
+    </section>
+
+</main>
+
+<script type="module" src="../js/auth.js"></script>
+
+</body>
+</html>

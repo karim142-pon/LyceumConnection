@@ -1,0 +1,415 @@
+/* ==========================================================
+   LyceumConnection
+   Auth Pages (login/register)
+   ========================================================== */
+
+/* ---------- Фон ---------- */
+
+body{
+
+    overflow-x:hidden;
+
+    position:relative;
+
+}
+
+/* Большая декоративная фигура */
+
+.background-shape{
+
+    position:fixed;
+
+    inset:-20% auto auto -15%;
+
+    width:700px;
+
+    height:700px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(37,99,235,.22) 0%,
+            rgba(96,165,250,.08) 45%,
+            transparent 75%
+        );
+
+    filter:blur(18px);
+
+    pointer-events:none;
+
+    z-index:-2;
+
+}
+
+/* Вторая фигура */
+
+.background-shape::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-420px;
+
+    bottom:-220px;
+
+    width:600px;
+
+    height:600px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(37,99,235,.16),
+            transparent 70%
+        );
+
+    filter:blur(30px);
+
+}
+
+/* ---------- Основной контейнер ---------- */
+
+.auth-container{
+
+    min-height:100vh;
+
+    display:grid;
+
+    grid-template-columns:1fr 480px;
+
+    align-items:center;
+
+    gap:80px;
+
+    width:min(1280px,100% - 60px);
+
+    margin:auto;
+
+    padding:40px 0;
+
+}
+
+/* ---------- Левая колонка ---------- */
+
+.auth-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+    animation:slideLeft .7s ease;
+
+}
+
+.auth-left h1{
+
+    font-size:clamp(2.8rem,5vw,4.2rem);
+
+    line-height:1.05;
+
+    letter-spacing:-1px;
+
+}
+
+.auth-left p{
+
+    max-width:520px;
+
+    font-size:1.15rem;
+
+    color:var(--color-text-light);
+
+}
+
+/* ---------- Правая колонка ---------- */
+
+.auth-right{
+
+    display:flex;
+
+    justify-content:center;
+
+    animation:slideRight .7s ease;
+
+}
+
+/* ---------- Карточка ---------- */
+
+.auth-card{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+    padding:34px;
+
+    border-radius:28px;
+
+    background:
+        rgba(255,255,255,.82);
+
+    border:1px solid rgba(255,255,255,.45);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 20px 55px rgba(15,23,42,.10);
+
+}
+
+.auth-card h2{
+
+    text-align:center;
+
+    font-size:2rem;
+
+    margin-bottom:6px;
+
+}
+
+/* ---------- Поля ---------- */
+
+.input-group{
+
+    gap:10px;
+
+}
+
+.input-group input{
+
+    height:52px;
+
+    font-size:1rem;
+
+}
+
+.input-group input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/* ---------- Кнопки ---------- */
+
+.primary-button{
+
+    height:54px;
+
+    font-size:1rem;
+
+    letter-spacing:.2px;
+
+}
+
+.secondary-button{
+
+    height:52px;
+
+}
+
+/* ---------- Разделитель ---------- */
+
+.divider{
+
+    margin:4px 0;
+
+}
+
+/* ---------- Статусы ---------- */
+
+.status-message{
+
+    min-height:22px;
+
+    font-weight:500;
+
+}
+
+/* ---------- Дополнительные ссылки ---------- */
+
+.auth-link{
+
+    text-align:center;
+
+    color:var(--color-primary);
+
+    font-weight:600;
+
+}
+
+.auth-link:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ---------- Проверка пароля ---------- */
+
+.password-strength{
+
+    display:flex;
+
+    gap:6px;
+
+    margin-top:4px;
+
+}
+
+.password-strength span{
+
+    flex:1;
+
+    height:5px;
+
+    border-radius:999px;
+
+    background:#e5e7eb;
+
+}
+
+.password-strength span.active{
+
+    background:var(--color-primary);
+
+}
+
+/* ---------- Анимации ---------- */
+
+@keyframes slideLeft{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(-35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+@keyframes slideRight{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+/* ---------- Планшет ---------- */
+
+@media (max-width:960px){
+
+    .auth-container{
+
+        grid-template-columns:1fr;
+
+        gap:40px;
+
+        width:min(100% - 40px,560px);
+
+        text-align:center;
+
+    }
+
+    .auth-left{
+
+        align-items:center;
+
+    }
+
+    .auth-left p{
+
+        max-width:100%;
+
+    }
+
+}
+
+/* ---------- Телефон ---------- */
+
+@media (max-width:560px){
+
+    .auth-container{
+
+        width:min(100% - 24px,560px);
+
+        padding:24px 0;
+
+    }
+
+    .auth-card{
+
+        padding:24px;
+
+        border-radius:22px;
+
+    }
+
+    .auth-left h1{
+
+        font-size:2.5rem;
+
+    }
+
+    .logo-circle{
+
+        width:72px;
+
+        height:72px;
+
+        font-size:1.2rem;
+
+    }
+
+    .background-shape{
+
+        width:420px;
+
+        height:420px;
+
+    }
+
+}
+
+/* ---------- Уменьшение анимаций ---------- */
+
+@media (prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}

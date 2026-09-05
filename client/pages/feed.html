@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LyceumConnection — Лента</title>
+
+    <meta http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self';
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data:;
+        connect-src 'self' http://localhost:3000 http://127.0.0.1:3000;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+      ">
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/feed.css">
+</head>
+
+<body>
+
+<!-- Верхняя навигация -->
+
+<header class="navbar">
+
+    <div class="nav-left">
+
+        <div class="logo">
+            LC
+        </div>
+
+        <div class="search-box">
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="Поиск пользователей и постов">
+
+        </div>
+
+    </div>
+
+    <nav class="nav-center">
+
+        <button class="nav-button active">
+            Лента
+        </button>
+
+        <button class="nav-button">
+            Друзья
+        </button>
+
+        <button class="nav-button">
+            Сообщения
+        </button>
+
+        <button class="nav-button">
+            Уведомления
+        </button>
+
+    </nav>
+
+    <div class="nav-right">
+        <button id="profileButton" class="avatar-button">
+            LC
+        </button>
+        
+        <button id="logoutButton" class="icon-button">
+            Выйти
+        </button>
+
+
+    </div>
+
+</header>
+
+<!-- Основной контейнер -->
+
+<main class="feed-layout">
+
+    <!-- Левая панель -->
+
+    <aside class="sidebar">
+
+        <section class="profile-preview">
+
+            <div class="large-avatar">
+                LC
+            </div>
+
+            <h3 id="sidebarName">
+                Пользователь
+            </h3>
+
+            <p id="sidebarUsername">
+                @username
+            </p>
+
+        </section>
+
+        <nav class="sidebar-menu">
+
+            <button>Мой профиль</button>
+            <button>Закладки</button>
+            <button>Фотографии</button>
+            <button>Настройки</button>
+
+        </nav>
+
+    </aside>
+
+    <!-- Центральная часть -->
+
+    <section class="feed">
+
+        <!-- Создание поста -->
+
+        <article class="create-post">
+
+            <div class="create-post-header">
+
+                <div class="small-avatar">
+                    LC
+                </div>
+
+                <button
+                    id="openPostModal"
+                    class="post-placeholder">
+
+                    Что нового?
+
+                </button>
+
+            </div>
+
+            <div class="create-actions">
+
+                <button>Фото</button>
+                <button>Настроение</button>
+                <button>Опрос</button>
+
+            </div>
+
+        </article>
+
+        <!-- Лента -->
+
+        <section
+            id="postsContainer"
+            class="posts-container"
+            aria-live="polite">
+
+        </section>
+
+    </section>
+
+    <!-- Правая панель -->
+
+    <aside class="right-panel">
+
+        <section class="info-card">
+
+            <h3>Активность</h3>
+
+            <ul>
+
+                <li>Новых сообщений: <span id="messagesCount">0</span></li>
+                <li>Новых уведомлений: <span id="notificationsCount">0</span></li>
+                <li>Заявок в друзья: <span id="requestsCount">0</span></li>
+
+            </ul>
+
+        </section>
+
+        <section class="info-card">
+
+            <h3>LyceumConnection</h3>
+
+            <p>
+                Учебная социальная сеть для общения,
+                публикации постов и взаимодействия
+                между пользователями.
+            </p>
+
+        </section>
+
+    </aside>
+
+</main>
+
+<!-- Модальное окно -->
+
+<div id="postModal" class="modal hidden">
+
+    <div class="modal-content">
+
+        <button
+            id="closePostModal"
+            class="close-button">
+
+            ×
+
+        </button>
+
+        <h2>Создать публикацию</h2>
+
+        <form id="postForm">
+
+            <textarea
+                id="postContent"
+                maxlength="5000"
+                placeholder="Поделитесь своими мыслями..."
+                required></textarea>
+
+            <div class="modal-footer">
+
+                <span id="charCounter">
+                    0 / 5000
+                </span>
+
+                <button
+                    id="publishButton"
+                    class="primary-button"
+                    type="submit">
+
+                    Опубликовать
+
+                </button>
+
+            </div>
+
+        </form>
+
+        <p
+            id="postStatus"
+            class="status-message"
+            aria-live="polite"></p>
+
+    </div>
+
+</div>
+
+<!-- Шаблон карточки поста -->
+
+<template id="postTemplate">
+
+    <article class="post-card">
+
+        <header class="post-header">
+
+            <div class="small-avatar post-avatar">
+                LC
+            </div>
+
+            <div>
+
+                <h3 class="post-name"></h3>
+
+                <p class="post-date"></p>
+
+            </div>
+
+        </header>
+
+        <p class="post-text"></p>
+
+        <footer class="post-footer">
+
+            <button class="like-button">
+                👍
+                <span class="like-count">0</span>
+            </button>
+
+            <button class="comment-button">
+                💬
+                <span class="comment-count">0</span>
+            </button>
+
+        </footer>
+
+    </article>
+
+</template>
+
+<script type="module" src="../js/feed.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LyceumConnection — Вход</title>
+
+    <!-- Защита от XSS -->
+    <meta http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self';
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data:;
+        connect-src 'self' http://localhost:3000 http://127.0.0.1:3000;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+      ">
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+
+<div class="background-shape"></div>
+
+<main class="auth-container">
+
+    <section class="auth-left">
+
+        <div class="logo-circle">
+            LC
+        </div>
+
+        <h1>LyceumConnection</h1>
+
+        <p>
+            Общайтесь с одноклассниками, делитесь новостями
+            и оставайтесь на связи.
+        </p>
+
+    </section>
+
+    <section class="auth-right">
+
+        <form id="loginForm"
+              class="auth-card"
+              autocomplete="off"
+              novalidate>
+
+            <h2>Вход</h2>
+
+            <div class="input-group">
+
+                <label for="email">Электронная почта</label>
+
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="example@lyceum.ru"
+                    maxlength="255"
+                    required
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label for="password">Пароль</label>
+
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Введите пароль"
+                    minlength="8"
+                    maxlength="128"
+                    required
+                >
+
+            </div>
+
+            <button
+                id="loginButton"
+                class="primary-button"
+                type="submit">
+
+                Войти
+
+            </button>
+
+            <p id="statusMessage"
+               class="status-message"
+               aria-live="polite"></p>
+
+            <div class="divider"></div>
+
+            <a class="secondary-button"
+               href="register.html">
+
+                Создать аккаунт
+
+            </a>
+
+        </form>
+
+    </section>
+
+</main>
+
+<script type="module" src="../js/auth.js"></script>
+
+</body>
+</html>
