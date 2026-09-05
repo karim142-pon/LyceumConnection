@@ -1,0 +1,162 @@
+/* ==========================================================
+   LyceumConnection — Legal Pages
+   ========================================================== */
+
+:root{
+    --color-primary:#2563eb;
+    --color-primary-hover:#1d4ed8;
+
+    --color-background:#f3f6fb;
+    --color-surface:#ffffff;
+
+    --color-text:#1f2937;
+    --color-text-light:#6b7280;
+
+    --color-border:#dbe3ef;
+
+    --radius:18px;
+    --radius-small:10px;
+
+    --shadow:0 10px 30px rgba(15,23,42,.08);
+
+    --max-width:960px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:var(--color-background);
+    color:var(--color-text);
+    line-height:1.7;
+}
+
+.navbar{
+    background:white;
+    box-shadow:var(--shadow);
+    padding:16px 24px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    font-size:1.3rem;
+    font-weight:700;
+}
+
+.logo-circle{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:var(--color-primary);
+    color:white;
+}
+
+.back-button{
+    text-decoration:none;
+    color:white;
+    background:var(--color-primary);
+
+    padding:10px 18px;
+    border-radius:var(--radius-small);
+    transition:.2s;
+}
+
+.back-button:hover{
+    background:var(--color-primary-hover);
+}
+
+.container{
+    max-width:var(--max-width);
+    margin:36px auto;
+    padding:0 20px;
+}
+
+.document{
+    background:var(--color-surface);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:42px;
+}
+
+.document h1{
+    font-size:2.2rem;
+    margin-bottom:12px;
+}
+
+.document .date{
+    color:var(--color-text-light);
+    margin-bottom:28px;
+}
+
+.document h2{
+    margin-top:34px;
+    margin-bottom:12px;
+    color:var(--color-primary);
+}
+
+.document h3{
+    margin-top:22px;
+    margin-bottom:8px;
+}
+
+.document p{
+    margin-bottom:14px;
+}
+
+.document ul{
+    margin-left:22px;
+    margin-bottom:18px;
+}
+
+.document li{
+    margin-bottom:8px;
+}
+
+.table{
+    width:100%;
+    border-collapse:collapse;
+    margin:20px 0;
+}
+
+.table th,
+.table td{
+    border:1px solid var(--color-border);
+    padding:12px;
+    text-align:left;
+}
+
+.table th{
+    background:#eef4ff;
+}
+
+.notice{
+    background:#eef4ff;
+    border-left:5px solid var(--color-primary);
+    padding:16px;
+    border-radius:10px;
+    margin:22px 0;
+}
+
+.footer{
+    margin-top:40px;
+    padding-top:24px;
+    border-top:1px solid var(--color-border);
+    color:var(--color-text-light);
+    text-align:center;
+}

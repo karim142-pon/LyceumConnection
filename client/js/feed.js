@@ -1,83 +1,63 @@
-import { logoutUser, createPost, getPosts } from "./api.js";
+import {
+    logoutUser,
+    createPost,
+    getPosts
+} from "./api.js";
 
 const logoutButton = document.getElementById("logoutButton");
 
 const postModal = document.getElementById("postModal");
 const openPostModal = document.getElementById("openPostModal");
 const closePostModal = document.getElementById("closePostModal");
-const postContent = document.getElementById("postContent");
+
 const postForm = document.getElementById("postForm");
+const postContent = document.getElementById("postContent");
 const postsContainer = document.getElementById("postsContainer");
 const charCounter = document.getElementById("charCounter");
 const postStatus = document.getElementById("postStatus");
 
 function openModal() {
+
     postModal.classList.remove("hidden");
 
-    // Ставим курсор в поле ввода
     setTimeout(() => postContent.focus(), 50);
+
 }
 
 function closeModal() {
+
     postModal.classList.add("hidden");
+
 }
 
 openPostModal?.addEventListener("click", openModal);
 
 closePostModal?.addEventListener("click", closeModal);
 
-// Закрытие по клику на затемнение
 postModal?.addEventListener("click", (event) => {
+
     if (event.target === postModal) {
+
         closeModal();
+
     }
+
 });
 
-// Закрытие по Esc
 document.addEventListener("keydown", (event) => {
+
     if (event.key === "Escape") {
+
         closeModal();
+
     }
+
 });
 
-// Выход из аккаунта
-logoutButton?.addEventListener("click", async () => {
-    await logoutUser();
-    window.location.href = "login.html";
-});
 postContent?.addEventListener("input", () => {
-    charCounter.textContent = `${postContent.value.length} / 5000`;
-});
 
-postForm?.addEventListener("submit", async (event) => {
-
-    event.preventDefault();
-
-    const content = postContent.value.trim();
-
-    if (!content) return;
-
-    try {
-
-        await createPost({
-            content,
-            imageUrl: ""
-        });
-
-        postContent.value = "";
-        charCounter.textContent = "0 / 5000";
-
-        postStatus.textContent = "Публикация создана.";
-
-        closeModal();
-
-        await loadPosts();
-
-    } catch (error) {
-
-        postStatus.textContent = error.message;
-
-    }
+    charCounter.textContent =
+        `${postContent.value.length} / 5000`;
 
 });
 
@@ -117,5 +97,48 @@ function renderPost(post) {
     postsContainer.appendChild(node);
 
 }
+
+postForm?.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const content = postContent.value.trim();
+
+    if (!content) return;
+
+    try {
+
+        await createPost({
+
+            content,
+            imageUrl: ""
+
+        });
+
+        postContent.value = "";
+
+        charCounter.textContent = "0 / 5000";
+
+        postStatus.textContent = "";
+
+        closeModal();
+
+        await loadPosts();
+
+    } catch (error) {
+
+        postStatus.textContent = error.message;
+
+    }
+
+});
+
+logoutButton?.addEventListener("click", async () => {
+
+    await logoutUser();
+
+    location.href = "login.html";
+
+});
 
 loadPosts();

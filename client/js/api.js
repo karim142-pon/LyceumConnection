@@ -160,15 +160,7 @@ export async function createPost(data) {
 
 }
 
-export async function likePost(postId) {
 
-    return request(`/posts/${postId}/like`, {
-
-        method: "POST"
-
-    });
-
-}
 
 /* ==========================================================
    COMMENTS
@@ -259,5 +251,33 @@ export async function markNotificationRead(id) {
         method: "PATCH"
 
     });
+
+}
+
+export async function likePost(postId) {
+
+    const response = await fetch(`/api/likes/${postId}`, {
+
+        method: "POST",
+
+        credentials: "include"
+
+    });
+
+    return response.json();
+
+}
+
+export async function unlikePost(postId) {
+
+    const response = await fetch(`/api/likes/${postId}`, {
+
+        method: "DELETE",
+
+        credentials: "include"
+
+    });
+
+    return response.json();
 
 }

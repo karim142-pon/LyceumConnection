@@ -71,15 +71,20 @@ router.get("/", authMiddleware, async (req, res) => {
             `SELECT
                 posts.id,
                 posts.content,
+                posts.image_url,
                 posts.created_at,
+
                 users.id AS user_id,
                 users.first_name,
                 users.last_name,
                 users.username,
                 users.avatar_url
+
              FROM posts
+
              JOIN users
                 ON users.id = posts.user_id
+
              ORDER BY posts.created_at DESC`
 
         );
@@ -88,10 +93,10 @@ router.get("/", authMiddleware, async (req, res) => {
 
     } catch (error) {
 
-        console.error(error);
+        console.error("GET /api/posts:", error);
 
         res.status(500).json({
-            message: "Ошибка загрузки ленты."
+            message: error.message
         });
 
     }

@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+import likesRoutes from "./routes/likes.js";
 import postsRoutes from "./routes/posts.js";
 import express from "express";
 import helmet from "helmet";
@@ -17,6 +18,8 @@ dotenv.config({ path: "../.env" });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+
 
 // Безопасность HTTP-заголовков
 app.use(helmet());
@@ -40,6 +43,7 @@ app.use(rateLimit({
 // Маршруты
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postsRoutes);
+app.use("/api/likes", likesRoutes);
 
 // Проверка работы сервера
 app.get("/api/health", (req, res) => {
