@@ -329,3 +329,40 @@ export async function updateProfile(data) {
     return response.json();
 
 }
+
+export async function uploadAvatar(file){
+
+    const formData=new FormData();
+
+    formData.append(
+        "avatar",
+        file
+    );
+
+    const response=await fetch(
+
+        "/api/profile/avatar",
+
+        {
+
+            method:"POST",
+
+            credentials:"include",
+
+            body:formData
+
+        }
+
+    );
+
+    if(!response.ok){
+
+        const error=await response.json();
+
+        throw new Error(error.message);
+
+    }
+
+    return response.json();
+
+}

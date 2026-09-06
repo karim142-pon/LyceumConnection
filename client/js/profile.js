@@ -1,6 +1,7 @@
 import {
     getProfile,
-    updateProfile
+    updateProfile,
+    uploadAvatar
 } from "./api.js";
 
 const backButton = document.getElementById("backButton");
@@ -19,6 +20,11 @@ const editLastName = document.getElementById("editLastName");
 const editBio = document.getElementById("editBio");
 
 const bioCounter = document.getElementById("bioCounter");
+const avatarInput=document.getElementById("avatarInput");
+
+const avatarImage=document.getElementById("profileAvatarImage");
+
+const avatarLetter=document.getElementById("profileAvatarLetter");
 
 let currentProfile = null;
 
@@ -56,8 +62,20 @@ const date = new Date(profile.created_at);
 document.getElementById("profileJoined").textContent =
 `На платформе с ${date.toLocaleDateString("ru-RU")}`;
 
-document.getElementById("profileAvatar").textContent =
-profile.first_name.charAt(0);
+if(profile.avatar_url){
+
+    avatarImage.src=profile.avatar_url;
+
+    avatarImage.classList.remove("hidden");
+
+    avatarLetter.classList.add("hidden");
+
+}else{
+
+    avatarLetter.textContent=
+    profile.first_name.charAt(0);
+
+}
 
 }catch(error){
 
@@ -129,6 +147,40 @@ editForm?.addEventListener("submit", async event=>{
         });
 
         closeModal();
+
+        await loadProfile();
+
+    }catch(error){
+
+        alert(error.message);
+
+    }
+
+});
+
+document
+.getElementById("profileAvatar")
+?.addEventListener("click",()=>{
+
+    avatarInput.click();
+
+});
+
+avatarInput?.addEventListener("change",async()=>{
+
+    const file=avatarInput.files[0];
+
+    if(!file)return;
+
+    avatarImage.src=URL.createObjectURL(file);
+
+    avatarImage.classList.remove("hidden");
+
+    avatarLetter.classList.add("hidden");
+
+    try{
+
+        await uploadAvatar(file);
 
         await loadProfile();
 

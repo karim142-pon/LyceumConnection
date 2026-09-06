@@ -3,8 +3,61 @@ import { z } from "zod";
 
 import pool from "../models/db.js";
 import authMiddleware from "../middleware/auth.js";
+import multer from "multer";
+import path from "path";
 
 const router = express.Router();
+/* =========================================
+   Multer
+========================================= */
+
+const storage = multer.diskStorage({
+
+    destination(req, file, cb){
+
+        cb(null, "uploads/avatars");
+
+    },
+
+    filename(req, file, cb){
+
+        const extension = path.extname(file.originalname);
+
+        cb(
+            null,
+            `${req.user.id}-${Date.now()}${extension}`
+        );
+
+    }
+
+});
+
+const upload = multer({
+
+    storage,
+
+    limits:{
+
+        fileSize:5*1024*1024
+
+    },
+
+    fileFilter(req,file,cb){
+
+        const allowed=[
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+        ];
+
+        cb(
+            null,
+            allowed.includes(file.mimetype)
+        );
+
+    }
+
+});
 
 /* =========================================
    Схема валидации
@@ -128,5 +181,65 @@ router.put("/me", authMiddleware, async (req, res) => {
     }
 
 });
+
+/* =========================================
+   Загрузка аватара
+========================================= */
+
+router.post(
+    "/avatar",
+    authMiddleware,
+    upload.single("avatar"),
+
+    async(req,res)=>{
+
+        try{
+
+            if(!req.file){
+
+                return res.status(400).json({
+                    message:"Файл не выбран."
+                });
+
+            }
+
+            const avatarUrl=`/uploads/avatars/${req.file.filename}`;
+
+            await pool.query(
+
+                `UPDATE users
+
+                 SET avatar_url=$1
+
+                 WHERE id=$2`,
+
+                [
+                    avatarUrl,
+                    req.user.id
+                ]
+
+            );
+
+            res.json({
+
+                avatar_url:avatarUrl
+
+            });
+
+        }catch(error){
+
+            console.error(error);
+
+            res.status(500).json({
+
+                message:"Ошибка загрузки."
+
+            });
+
+        }
+
+    }
+
+);
 
 export default router;

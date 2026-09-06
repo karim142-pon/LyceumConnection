@@ -34,6 +34,10 @@ app.use(cors({
 app.use(express.json({ limit: "1mb" }));
 app.use(express.static(path.join(__dirname, "../client")));
 app.use(cookieParser());
+app.use(
+    "/uploads",
+    express.static("uploads")
+);
 
 // Ограничение запросов (защита от перебора)
 app.use(rateLimit({
