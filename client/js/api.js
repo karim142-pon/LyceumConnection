@@ -366,3 +366,21 @@ export async function uploadAvatar(file){
     return response.json();
 
 }
+
+export async function getMyPosts() {
+
+    const response = await fetch("/api/profile/me/posts", {
+
+        credentials: "include"
+
+    });
+
+    if (!response.ok) {
+
+        throw new Error("Не удалось загрузить публикации.");
+
+    }
+
+    return response.json();
+
+}

@@ -373,3 +373,55 @@ transition:.2s;
 opacity:1;
 
 }
+
+/* ==========================================================
+   Profile Posts
+   ========================================================== */
+
+.profile-post-card{
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    margin-bottom:16px;
+
+    transition:.2s;
+
+}
+
+.profile-post-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 22px rgba(15,23,42,.08);
+
+}
+
+.profile-post-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:12px;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+.profile-post-header span{
+
+    color:#6b7280;
+
+    font-size:.9rem;
+
+}

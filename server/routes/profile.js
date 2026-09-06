@@ -242,4 +242,50 @@ router.post(
 
 );
 
+/* =========================================
+   Получить свои публикации
+========================================= */
+
+router.get("/me/posts", authMiddleware, async (req, res) => {
+
+    try {
+
+        const result = await pool.query(
+
+            `SELECT
+                posts.id,
+                posts.content,
+                posts.image_url,
+                posts.created_at,
+                users.first_name,
+                users.last_name,
+                users.avatar_url
+
+             FROM posts
+
+             JOIN users
+                ON users.id = posts.user_id
+
+             WHERE posts.user_id = $1
+
+             ORDER BY posts.created_at DESC`,
+
+            [req.user.id]
+
+        );
+
+        res.json(result.rows);
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Ошибка загрузки публикаций."
+        });
+
+    }
+
+});
+
 export default router;

@@ -1,7 +1,8 @@
 import {
     getProfile,
     updateProfile,
-    uploadAvatar
+    uploadAvatar,
+    getMyPosts
 } from "./api.js";
 
 const backButton = document.getElementById("backButton");
@@ -25,6 +26,7 @@ const avatarInput=document.getElementById("avatarInput");
 const avatarImage=document.getElementById("profileAvatarImage");
 
 const avatarLetter=document.getElementById("profileAvatarLetter");
+const userPostsContainer = document.getElementById("userPostsContainer");
 
 let currentProfile = null;
 
@@ -82,6 +84,53 @@ if(profile.avatar_url){
 console.error(error);
 
 }
+
+}
+
+async function loadMyPosts() {
+
+    try {
+
+        const posts = await getMyPosts();
+
+        userPostsContainer.innerHTML = "";
+
+        if (!posts.length) {
+
+            userPostsContainer.innerHTML =
+                '<p class="loading-text">У вас пока нет публикаций.</p>';
+
+            return;
+
+        }
+
+        posts.forEach(post => {
+
+            const card = document.createElement("article");
+
+            card.className = "profile-post-card";
+
+            card.innerHTML = `
+                <div class="profile-post-header">
+
+                    <strong>${post.first_name} ${post.last_name}</strong>
+
+                    <span>${new Date(post.created_at).toLocaleString("ru-RU")}</span>
+
+                </div>
+
+                <p>${post.content}</p>
+            `;
+
+            userPostsContainer.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 }
 
@@ -192,4 +241,7 @@ avatarInput?.addEventListener("change",async()=>{
 
 });
 
-loadProfile();
+await Promise.all([
+    loadProfile(),
+    loadMyPosts()
+]);
