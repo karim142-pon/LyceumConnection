@@ -413,3 +413,23 @@ body{
     }
 
 }
+
+
+.checkbox-row{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.checkbox-row input[type="checkbox"]{
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.checkbox-row span{
+    flex: 1;
+    line-height: 1.4;
+}
