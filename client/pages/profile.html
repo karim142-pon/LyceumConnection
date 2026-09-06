@@ -33,8 +33,9 @@ form-action 'self';
 
     <div class="nav-left">
 
-        <button id="backButton" class="icon-button">
-            ← Назад
+        <button id="backButton" class="back-button">
+            <icon name=arrow-left inline/>
+            <span>Назад</span>
         </button>
 
     </div>
@@ -53,55 +54,66 @@ form-action 'self';
 
 <div class="profile-info">
 
-<div id="profileAvatar"
-     class="profile-avatar">
+    <div id="profileAvatar" class="profile-avatar">
 
-<img
-    id="profileAvatarImage"
-    class="avatar-image hidden"
-    alt="Аватар">
+        <img
+            id="profileAvatarImage"
+            class="avatar-image hidden"
+            alt="Аватар">
 
-<span id="profileAvatarLetter">
-LC
-</span>
+        <span id="profileAvatarLetter">
+            LC
+        </span>
 
-<input
-    id="avatarInput"
-    type="file"
-    accept="image/png,image/jpeg,image/webp"
-    hidden>
+        <input
+            id="avatarInput"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            hidden>
 
-</div>
+    </div>
 
-<div class="profile-text">
+    <div class="profile-text">
 
-<h1 id="profileName">
-Загрузка...
-</h1>
+        <h1 id="profileName">
+            Загрузка...
+        </h1>
 
-<p id="profileUsername">
-@username
-</p>
+        <div class="username-pill">
 
-<p id="profileBio">
-Биография пока не заполнена.
-</p>
+            <icon name=circle-user color=info/>
 
-<p id="profileJoined"
-   class="joined-date">
+            <span id="profileUsername">
+                @username
+            </span>
 
-Дата регистрации
+        </div>
 
-</p>
+        <p id="profileBio">
+            Биография пока не заполнена.
+        </p>
 
-</div>
+        <div class="joined-info">
 
-<button id="editProfileButton"
-        class="primary-button">
+            <icon name=calendar color=secondary/>
 
-Редактировать профиль
+            <span id="profileJoined">
+                На платформе
+            </span>
 
-</button>
+        </div>
+
+    </div>
+
+    <button
+        id="editProfileButton"
+        class="edit-profile-button">
+
+        <icon name=edit inline/>
+
+        Редактировать профиль
+
+    </button>
 
 </div>
 
