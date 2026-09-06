@@ -40,19 +40,17 @@ background:linear-gradient(
 
 .profile-info{
 
-padding:0 32px 32px;
+    display:grid;
 
-display:flex;
+    grid-template-columns:auto 1fr auto;
 
-align-items:flex-end;
+    gap:24px;
 
-gap:24px;
+    align-items:end;
 
-position:relative;
+    padding:0 32px 32px;
 
-margin-top:-70px;
-
-flex-wrap:wrap;
+    margin-top:-70px;
 
 }
 
@@ -98,9 +96,13 @@ min-width:220px;
 
 .profile-text h1{
 
-font-size:2rem;
+    font-size:2.2rem;
 
-margin-bottom:4px;
+    font-weight:700;
+
+    color:#111827;
+
+    margin-bottom:6px;
 
 }
 
@@ -112,9 +114,13 @@ margin-bottom:8px;
 
 #profileUsername{
 
-color:#6b7280;
+    color:#2563eb;
 
-font-size:1.05rem;
+    font-size:1rem;
+
+    font-weight:600;
+
+    margin-bottom:14px;
 
 }
 
@@ -492,5 +498,108 @@ opacity:1;
 grid-template-columns:1fr;
 
 }
+
+}
+
+
+.navbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 22px;
+
+    background:white;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+
+}
+
+.logo{
+
+    width:44px;
+    height:44px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-weight:700;
+
+    font-size:1.1rem;
+
+}
+
+.icon-button{
+
+    padding:10px 18px;
+
+    border-radius:12px;
+
+    background:#eef4ff;
+
+    color:#2563eb;
+
+    font-weight:600;
+
+}
+
+.icon-button:hover{
+
+    background:#dbeafe;
+
+}
+
+.profile-text{
+
+    min-width:0;
+
+}
+
+#profileBio{
+
+    white-space:normal;
+
+    overflow-wrap:anywhere;
+
+    line-height:1.55;
+
+}
+
+
+.profile-post-footer{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:18px;
+
+}
+
+.profile-post-footer button{
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    background:#f3f6fb;
+
+}
+
+.profile-post-footer button:hover{
+
+    background:#e5eefc;
 
 }

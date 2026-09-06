@@ -52,7 +52,7 @@ editLastName.value = profile.last_name;
 editBio.value = profile.bio || "";
 
 bioCounter.textContent =
-`${editBio.value.length} / 300`;
+`${editBio.value.length} / 120`;
 
 document.getElementById("profileName").textContent =
 `${profile.first_name} ${profile.last_name}`;
@@ -115,15 +115,31 @@ async function loadMyPosts() {
             card.className = "profile-post-card";
 
             card.innerHTML = `
-                <div class="profile-post-header">
+            <div class="profile-post-header">
 
-                    <strong>${post.first_name} ${post.last_name}</strong>
+                <strong>${post.first_name} ${post.last_name}</strong>
 
-                    <span>${new Date(post.created_at).toLocaleString("ru-RU")}</span>
+                <span>${new Date(post.created_at).toLocaleString("ru-RU")}</span>
 
-                </div>
+            </div>
 
-                <p>${post.content}</p>
+            <p class="profile-post-text">${post.content}</p>
+
+            <div class="profile-post-footer">
+
+                <button class="like-button">
+
+                    👍 <span>${post.likes_count ?? 0}</span>
+
+                </button>
+
+                <button class="comment-button">
+
+                    💬 <span>${post.comments_count ?? 0}</span>
+
+                </button>
+
+            </div>
             `;
 
             userPostsContainer.appendChild(card);
@@ -220,7 +236,7 @@ document.addEventListener("keydown", event=>{
 editBio?.addEventListener("input", ()=>{
 
     bioCounter.textContent =
-    `${editBio.value.length} / 300`;
+    `${editBio.value.length} / 120`;
 
 });
 

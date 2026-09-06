@@ -69,7 +69,7 @@ const profileSchema = z.object({
 
     lastName: z.string().trim().min(2).max(50),
 
-    bio: z.string().trim().max(300).optional().default("")
+    bio: z.string().trim().max(120).optional().default("")
 
 });
 
