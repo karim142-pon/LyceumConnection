@@ -121,6 +121,73 @@ LC
 
 </main>
 
+<!-- =========================================
+     Модальное окно редактирования профиля
+========================================= -->
+
+<div id="editModal" class="modal hidden">
+
+    <div class="modal-content profile-modal">
+
+        <button id="closeEditModal" class="close-button">
+            ×
+        </button>
+
+        <h2>Редактировать профиль</h2>
+
+        <form id="editProfileForm">
+
+            <label>
+                Имя
+
+                <input
+                    id="editFirstName"
+                    type="text"
+                    maxlength="50"
+                    required>
+            </label>
+
+            <label>
+                Фамилия
+
+                <input
+                    id="editLastName"
+                    type="text"
+                    maxlength="50"
+                    required>
+            </label>
+
+            <label>
+                Биография
+
+                <textarea
+                    id="editBio"
+                    maxlength="300"
+                    rows="5"></textarea>
+            </label>
+
+            <div class="modal-footer">
+
+                <span id="bioCounter">
+                    0 / 300
+                </span>
+
+                <button
+                    class="primary-button"
+                    type="submit">
+
+                    Сохранить
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 <script type="module"
         src="../js/profile.js"></script>
 
