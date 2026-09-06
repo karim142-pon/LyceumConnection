@@ -2,7 +2,8 @@ import {
     getProfile,
     updateProfile,
     uploadAvatar,
-    getMyPosts
+    getMyPosts,
+    getProfileStats
 } from "./api.js";
 
 const backButton = document.getElementById("backButton");
@@ -27,6 +28,9 @@ const avatarImage=document.getElementById("profileAvatarImage");
 
 const avatarLetter=document.getElementById("profileAvatarLetter");
 const userPostsContainer = document.getElementById("userPostsContainer");
+const postsCount=document.getElementById("postsCount");
+const friendsCount=document.getElementById("friendsCount");
+const likesCount=document.getElementById("likesCount");
 
 let currentProfile = null;
 
@@ -131,6 +135,48 @@ async function loadMyPosts() {
         console.error(error);
 
     }
+
+}
+
+async function loadStats(){
+
+    try{
+
+        const stats=await getProfileStats();
+
+        animateCounter(postsCount,stats.posts);
+        animateCounter(friendsCount,stats.friends);
+        animateCounter(likesCount,stats.likes);
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+function animateCounter(element,target){
+
+    let current=0;
+
+    const step=Math.max(1,Math.ceil(target/25));
+
+    const timer=setInterval(()=>{
+
+        current+=step;
+
+        if(current>=target){
+
+            current=target;
+
+            clearInterval(timer);
+
+        }
+
+        element.textContent=current;
+
+    },18);
 
 }
 
@@ -243,5 +289,6 @@ avatarInput?.addEventListener("change",async()=>{
 
 await Promise.all([
     loadProfile(),
-    loadMyPosts()
+    loadMyPosts(), 
+    loadStats()
 ]);

@@ -288,4 +288,61 @@ router.get("/me/posts", authMiddleware, async (req, res) => {
 
 });
 
+/* =========================================
+   Статистика профиля
+========================================= */
+
+router.get("/me/stats", authMiddleware, async (req, res) => {
+
+    try {
+
+        const postsCount = await pool.query(
+
+            `SELECT COUNT(*)::int AS count
+             FROM posts
+             WHERE user_id=$1`,
+
+            [req.user.id]
+
+        );
+
+        const likesCount = await pool.query(
+
+            `SELECT COUNT(*)::int AS count
+
+             FROM likes
+
+             JOIN posts
+                ON posts.id=likes.post_id
+
+             WHERE posts.user_id=$1`,
+
+            [req.user.id]
+
+        );
+
+        res.json({
+
+            posts: postsCount.rows[0].count,
+
+            friends: 0,
+
+            likes: likesCount.rows[0].count
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            message: "Ошибка получения статистики."
+
+        });
+
+    }
+
+});
+
 export default router;

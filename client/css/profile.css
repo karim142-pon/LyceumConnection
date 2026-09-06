@@ -425,3 +425,72 @@ opacity:1;
     font-size:.9rem;
 
 }
+
+
+/* ==========================================================
+   Profile Stats
+   ========================================================== */
+
+.profile-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+
+    margin:24px 0;
+
+}
+
+.stat-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    text-align:center;
+
+    box-shadow:0 10px 24px rgba(15,23,42,.08);
+
+    transition:.25s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.stat-card span{
+
+    display:block;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:#2563eb;
+
+    margin-bottom:6px;
+
+}
+
+.stat-card p{
+
+    color:#6b7280;
+
+}
+
+@media(max-width:768px){
+
+.profile-stats{
+
+grid-template-columns:1fr;
+
+}
+
+}

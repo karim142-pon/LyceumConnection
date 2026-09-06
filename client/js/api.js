@@ -384,3 +384,27 @@ export async function getMyPosts() {
     return response.json();
 
 }
+
+export async function getProfileStats(){
+
+    const response=await fetch(
+
+        "/api/profile/me/stats",
+
+        {
+
+            credentials:"include"
+
+        }
+
+    );
+
+    if(!response.ok){
+
+        throw new Error("Не удалось загрузить статистику.");
+
+    }
+
+    return response.json();
+
+}
