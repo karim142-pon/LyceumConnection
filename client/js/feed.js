@@ -15,6 +15,13 @@ const postContent = document.getElementById("postContent");
 const postsContainer = document.getElementById("postsContainer");
 const charCounter = document.getElementById("charCounter");
 const postStatus = document.getElementById("postStatus");
+const myProfileButton = document.getElementById("myProfileButton");
+
+myProfileButton?.addEventListener("click", () => {
+
+window.location.href = "profile.html";
+
+});
 
 function openModal() {
 
