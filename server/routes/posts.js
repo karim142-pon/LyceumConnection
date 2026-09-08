@@ -103,4 +103,140 @@ router.get("/", authMiddleware, async (req, res) => {
 
 });
 
+/* =========================================
+   Редактирование поста
+========================================= */
+
+router.put("/:id", authMiddleware, async (req, res) => {
+
+    try {
+
+        const data = postSchema.parse(req.body);
+
+        const post = await pool.query(
+
+            `SELECT user_id
+             FROM posts
+             WHERE id = $1`,
+
+            [req.params.id]
+
+        );
+
+        if (!post.rows.length) {
+
+            return res.status(404).json({
+                message: "Пост не найден."
+            });
+
+        }
+
+        if (post.rows[0].user_id !== req.user.id) {
+
+            return res.status(403).json({
+                message: "Недостаточно прав."
+            });
+
+        }
+
+        const result = await pool.query(
+
+            `UPDATE posts
+
+             SET
+                content = $1,
+                image_url = $2
+
+             WHERE id = $3
+
+             RETURNING *`,
+
+            [
+                data.content,
+                data.imageUrl || null,
+                req.params.id
+            ]
+
+        );
+
+        res.json(result.rows[0]);
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Ошибка редактирования."
+        });
+
+    }
+
+});
+
+/* =========================================
+   Удаление поста
+========================================= */
+
+router.delete("/:id", authMiddleware, async (req, res) => {
+
+    try {
+
+        const post = await pool.query(
+
+            `SELECT user_id
+
+             FROM posts
+
+             WHERE id = $1`,
+
+            [req.params.id]
+
+        );
+
+        if (!post.rows.length) {
+
+            return res.status(404).json({
+                message: "Пост не найден."
+            });
+
+        }
+
+        if (post.rows[0].user_id !== req.user.id) {
+
+            return res.status(403).json({
+                message: "Недостаточно прав."
+            });
+
+        }
+
+        await pool.query(
+
+            `DELETE FROM posts
+
+             WHERE id = $1`,
+
+            [req.params.id]
+
+        );
+
+        res.json({
+
+            message: "Пост удалён."
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            message: "Ошибка удаления."
+
+        });
+
+    }
+
+});
+
 export default router;
